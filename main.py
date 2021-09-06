@@ -1,6 +1,7 @@
 import cv2
-from goAR import cursor
-import goAR
+from goAR import ARCursor
+from goAR import ARElements
+from goAR import catchCursor
 import requests
 import time
 
@@ -9,8 +10,8 @@ cap = cv2.VideoCapture(0)
 cap.set(3, 1280)
 cap.set(4, 1080)
 
-btn1 = goAR.Rect("btn1", "Get Users", [150, 150],size=[50, 50], isDraggable=False)
-btn2 = goAR.Circle("btn2", "Draggable", [450, 150], isDraggable=True)
+btn1 = ARElements.Rect("btn1", "Get Users", [150, 150],size=[50, 50], isDraggable=False)
+btn2 = ARElements.Circle("btn2", "Draggable", [450, 150], isDraggable=True)
 
 
 def getUsers(e):
@@ -30,8 +31,8 @@ while True:
     _, frame = cap.read()
     frame = cv2.flip(frame, 1)
 
-    cursor.move(frame)
-    goAR.catchCursor()
+    ARCursor.move(frame)
+    catchCursor()
 
     btn1.draw(frame)
     btn1.onClick(getUsers)
